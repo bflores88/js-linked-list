@@ -4,11 +4,7 @@
  * @return {Object} an object exposing methods to be used to manipulate a linked list
  */
 function linkedListGenerator() {
-  let linkedListArr = [];
-  let linkedListObject = {};
-  let objectNext = 'linkedListObject.next';
   let head = null;
-  let lastAdded = null;
   let tail = null;
 
   function getHead() {
@@ -16,58 +12,91 @@ function linkedListGenerator() {
   }
 
   function getTail() {
+    if(tail === null){return null;};
+
+    tail = head;
+    while(tail.next !== null){
+      tail = tail.next;
+    }
     return tail;
   }
 
   function add(value) {
-    let add = {};
-    add.value = value;
-    add.next = null;
-    linkedListArr.push(add);
-
-    
+    let newNode = {};
+    newNode.value = value;
+    newNode.next = null;
 
     if (head === null) {
-      head = add
-    };
-    lastAdded = add;
-    tail = lastAdded;
+      newNode.next = head;
+      head = newNode;
+    } else {
+      let endOfNodeList = head;
+      while (endOfNodeList.next !== null) {
+        endOfNodeList = endOfNodeList.next;
+      }
+      endOfNodeList.next = newNode;
+    }
 
-    return add;
+    tail = newNode;
+
+    return newNode;
   }
 
   function get(number) {
-    let get = linkedListArr[number];
-    if (get === undefined) {
-      return false;
-    };
-    return get;
+
+    let currentNode = head;
+    let counter = 0;
+
+    while (currentNode) {
+      if (counter === number) {
+        return currentNode;
+      }
+      counter++;
+      currentNode = currentNode.next;
+    }
+    return false;
   }
 
   function remove(number) {
-    if (number > linkedListArr.length - 1) {
+ 
+    if(number === 0){
+      head = head.next;
+      return head;
+    }
+
+    let previousNode = get(number-1);
+    if(!previousNode || !previousNode.next){
       return false;
-    };
-    let remove = '';
-    linkedListArr.splice(number, 1);
-    remove = linkedListArr[number];
-    head = linkedListArr[0];
-    tail = linkedListArr[linkedListArr.length - 1];
-    return remove;
+    }
+
+    previousNode.next = previousNode.next.next;
+    return;
   }
 
   function insert(value, number) {
-    if (number > linkedListArr.length || number < 0) {
-      return false;
+    if(get(number) === false){return false;};
+
+    if (!head) {
+      add(value);
     };
 
-    let add = {};
-    add.value = value;
-    add.next = null;
-    linkedListArr.splice(number, 0, add);
-    head = linkedListArr[0];
-    tail = linkedListArr[linkedListArr.length - 1];
+    if (number === 0) {
+      let newNode = {};
+      newNode.value = value;
+      newNode.next = head;
+      head = newNode;
+    }
+
+    let previousNode = get(number - 1);
+    let newNode = {};
+    newNode.value = value;
+    newNode.next = previousNode.next;
+    previousNode.next = newNode;
+
+    return;
   }
+
+
 
   return {
     getHead,
@@ -76,6 +105,6 @@ function linkedListGenerator() {
     get,
     remove,
     insert
-
   }
+
 }
