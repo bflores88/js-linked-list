@@ -5,6 +5,8 @@
  */
 function linkedListGenerator() {
   let linkedListArr = [];
+  let linkedListObject = {};
+  let objectNext = 'linkedListObject.next';
   let head = null;
   let lastAdded = null;
   let tail = null;
@@ -23,26 +25,23 @@ function linkedListGenerator() {
     add.next = null;
     linkedListArr.push(add);
 
+    
+
     if (head === null) {
       head = add
-    } else {
-      head.next = add;
     };
-
-    tail = add;
+    lastAdded = add;
+    tail = lastAdded;
 
     return add;
   }
 
   function get(number) {
-    let getVal;
-    for(let i = 0; i<number; i++){
-      getVal = head.next;
-    }
+    let get = linkedListArr[number];
     if (get === undefined) {
       return false;
     };
-    return getVal;
+    return get;
   }
 
   function remove(number) {
@@ -50,9 +49,6 @@ function linkedListGenerator() {
       return false;
     };
     let remove = '';
-
-
-
     linkedListArr.splice(number, 1);
     remove = linkedListArr[number];
     head = linkedListArr[0];
