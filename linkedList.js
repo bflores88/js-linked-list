@@ -12,10 +12,12 @@ function linkedListGenerator() {
   }
 
   function getTail() {
-    if(tail === null){return null;};
+    if (tail === null) {
+      return null;
+    };
 
     tail = head;
-    while(tail.next !== null){
+    while (tail.next !== null) {
       tail = tail.next;
     }
     return tail;
@@ -58,14 +60,14 @@ function linkedListGenerator() {
   }
 
   function remove(number) {
- 
-    if(number === 0){
+
+    if (number === 0) {
       head = head.next;
       return head;
     }
 
-    let previousNode = get(number-1);
-    if(!previousNode || !previousNode.next){
+    let previousNode = get(number - 1);
+    if (!previousNode || !previousNode.next) {
       return false;
     }
 
@@ -74,7 +76,9 @@ function linkedListGenerator() {
   }
 
   function insert(value, number) {
-    if(get(number) === false){return false;};
+    if (get(number) === false) {
+      return false;
+    };
 
     if (!head) {
       add(value);
@@ -95,8 +99,6 @@ function linkedListGenerator() {
 
     return;
   }
-
-
 
   return {
     getHead,
