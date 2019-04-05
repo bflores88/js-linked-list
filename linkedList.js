@@ -37,10 +37,9 @@ function linkedListGenerator() {
         endOfNodeList = endOfNodeList.next;
       }
       endOfNodeList.next = newNode;
-    }
+    };
 
     tail = newNode;
-
     return newNode;
   }
 
@@ -96,7 +95,6 @@ function linkedListGenerator() {
     newNode.value = value;
     newNode.next = previousNode.next;
     previousNode.next = newNode;
-
     return;
   }
 
