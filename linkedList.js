@@ -55,7 +55,7 @@ function linkedListGenerator() {
 
   function remove(number) {
     if(!head){
-      return {};
+      return false;
     }
 
     if (number === 0) {
